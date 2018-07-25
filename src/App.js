@@ -1,10 +1,26 @@
-import React, { Component } from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
+import React, { Component } from 'react'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+import Ages from './Ages'
 
-class App extends Component {
+const testQuery = gql`
+  {
+    people {
+      id
+      name
+      friends {
+        id
+      }
+      friends {
+        name
+      }
+    }
+  }
+`
+
+export default class App extends Component {
   render() {
-    const { data: { loading, people } } = this.props;
+    console.log('render App')
     return (
       <main>
         <header>
@@ -15,34 +31,37 @@ class App extends Component {
             reload with the changes.
           </p>
           <p>
-            The code which renders this component lives in{" "}
+            The code which renders this component lives in{' '}
             <code>./src/App.js</code>.
           </p>
           <p>
             The GraphQL schema is in <code>./src/graphql/schema</code>.
-            Currently the schema just serves a list of people with names and
-            ids.
           </p>
         </header>
-        {loading ? (
-          <p>Loading…</p>
-        ) : (
-          <ul>
-            {people.map(person => <li key={person.id}>{person.name}</li>)}
-          </ul>
-        )}
+        <Query query={testQuery}>
+          {({ loading, data: { people } }) => {
+            if (!loading) {
+              console.log('received query result in App component')
+            }
+            return (
+              <div>
+                {loading ? (
+                  <p>Loading…</p>
+                ) : (
+                  <div>
+                    <ul>
+                      {people.map(person => (
+                        <li key={person.id}>{person.name}</li>
+                      ))}
+                    </ul>
+                    <Ages />
+                  </div>
+                )}
+              </div>
+            )
+          }}
+        </Query>
       </main>
-    );
+    )
   }
 }
-
-export default graphql(
-  gql`
-    query ErrorTemplate {
-      people {
-        id
-        name
-      }
-    }
-  `
-)(App);

@@ -7,11 +7,12 @@
     "react-scripts": "2.1.8"
   },
   "dependencies": {
-    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-cache-inmemory": "1.6.0-rc.1",
     "apollo-client": "^2.5.1",
     "apollo-link": "^1.2.11",
     "graphql": "^14.2.0",
     "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4",
     "react": "^16.8.6",
     "react-apollo": "2.5.3",
     "react-dom": "^16.8.6"

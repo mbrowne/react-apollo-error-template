@@ -1,26 +1,31 @@
 {
   "private": true,
   "name": "apollo-client-error-template",
-  "version": "0.1.0",
-  "devDependencies": {
-    "gh-pages": "^1.1.0",
-    "react-scripts": "1.1.4"
-  },
+  "version": "1.0.0",
   "dependencies": {
-    "apollo-cache-inmemory": "^1.2.2",
-    "apollo-client": "^2.4.8",
-    "apollo-link": "^1.2.2",
-    "graphql": "^0.13.2",
-    "graphql-tag": "^2.9.2",
-    "graphql-tools": "^4.0.3",
-    "react": "^16.4.0",
-    "react-apollo": "^2.4.0-alpha.0",
-    "react-dom": "^16.4.0"
+    "@apollo/react-components": "^3.1.0",
+    "@apollo/react-hooks": "^3.1.0",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link": "^1.2.13",
+    "graphql": "^14.4.2",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "react-scripts": "3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "deploy": "PUBLIC_URL=/react-apollo-error-template/$(git symbolic-ref --short HEAD) npm run build && gh-pages-clean && gh-pages -d build --dest $(git symbolic-ref --short HEAD) --remote"
-  }
+    "test": "react-scripts test --env=jsdom"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

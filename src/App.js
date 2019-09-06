@@ -1,5 +1,5 @@
-import React, { PureComponent } from "react";
-import { Query } from "react-apollo";
+import React from "react";
+import { useQuery } from '@apollo/react-hooks'
 import gql from "graphql-tag";
 
 const GALLERY_QUERY1 = gql`
@@ -15,22 +15,15 @@ const GALLERY_QUERY1 = gql`
 
 const NotFound = () => 'Not found'
 
-class Component1 extends PureComponent {
-    render() {
-        return (
-            <Query query={GALLERY_QUERY1}>
-                {({ loading, data }) => {
-                    if (loading) {
-                        return 'Component1 loading...'
-                    }
-                    if (!data.gallery) {
-                        return <NotFound />
-                    }
-                    return <Component2 />
-                }}
-            </Query>
-        )
+function Component1() {
+    const { loading, data } = useQuery(GALLERY_QUERY1)
+    if (loading) {
+        return 'Component1 loading...'
     }
+    if (!data.gallery) {
+        return <NotFound />
+    }
+    return <Component2 />
 }
 
 const GALLERY_QUERY2 = gql`
@@ -47,20 +40,13 @@ const GALLERY_QUERY2 = gql`
     }
 `
 
-class Component2 extends PureComponent {
-    render() {
-        return (
-            <Query query={GALLERY_QUERY2}>
-                {result => {
-                    console.log('Component2 result', result)
-                    if (result.loading) {
-                        return 'Component2 loading...'
-                    }
-                    return 'Component2'
-                }}
-            </Query>
-        )
+function Component2() {
+    const result = useQuery(GALLERY_QUERY2)
+    console.log('Component2 result', result)
+    if (result.loading) {
+        return 'Component2 loading...'
     }
+    return 'Component2'
 }
 
 const App = () => {
